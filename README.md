@@ -106,7 +106,8 @@
 
 <br>
 <br>
-联系qq：https://jq.qq.com/?_wv=1027&k=wWOQVzep
+联系方式 1：https://jq.qq.com/?_wv=1027&k=wWOQVzep
+联系方式 2: https://qm.qq.com/cgi-bin/qm/qr?k=Cmt-5FPQsfNBFyTz3aCK7UUkTfhuy-30&noverify=0
 
 </body>
 </html>
