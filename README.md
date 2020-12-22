@@ -5,6 +5,16 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="robots" content="noimageindex">
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJVJBLB4RQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HJVJBLB4RQ');
+</script>
+
 </head>
 <body>
 <table>
