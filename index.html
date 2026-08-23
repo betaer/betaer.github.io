@@ -2,8 +2,102 @@
 <html>
 <head>
 <title>域名列表 Domain Name List</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="robots" content="noimageindex">
+
+<style>
+  .projects-section {
+    box-sizing: border-box;
+    width: min(960px, calc(100% - 32px));
+    margin: 28px auto 36px;
+    padding: 28px;
+    border: 1px solid #dbe7f6;
+    border-radius: 20px;
+    color: #172033;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(22, 119, 255, .13), transparent 38%),
+      linear-gradient(145deg, #f8fbff 0%, #ffffff 58%, #f5f9ff 100%);
+    box-shadow: 0 16px 44px rgba(31, 72, 125, .08);
+  }
+  .projects-eyebrow {
+    margin: 0 0 6px;
+    color: #1677ff;
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: .16em;
+  }
+  .projects-section h1 {
+    margin: 0;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.2;
+  }
+  .projects-intro {
+    max-width: 680px;
+    margin: 10px 0 22px;
+    color: #5f6f86;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .project-card {
+    box-sizing: border-box;
+    display: flex;
+    min-height: 190px;
+    padding: 20px;
+    border: 1px solid #dce7f5;
+    border-radius: 16px;
+    color: inherit;
+    text-decoration: none;
+    background: rgba(255, 255, 255, .88);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .project-card:hover,
+  .project-card:focus-visible {
+    border-color: #69a8ff;
+    outline: none;
+    box-shadow: 0 12px 30px rgba(22, 119, 255, .13);
+    transform: translateY(-2px);
+  }
+  .project-icon {
+    display: grid;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin-right: 14px;
+    place-items: center;
+    border-radius: 13px;
+    color: #1677ff;
+    background: #eaf3ff;
+  }
+  .project-icon svg { width: 24px; height: 24px; }
+  .project-copy { display: flex; min-width: 0; flex: 1; flex-direction: column; }
+  .project-tag {
+    margin-bottom: 7px;
+    color: #6b7b91;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .project-card h2 { margin: 0; font-size: 19px; line-height: 1.35; }
+  .project-card p { margin: 8px 0 16px; color: #53637a; font-size: 13px; line-height: 1.65; }
+  .project-link-label {
+    margin-top: auto;
+    color: #0958d9;
+    font-size: 13px;
+    font-weight: 750;
+  }
+  @media (max-width: 680px) {
+    .projects-section { width: min(100% - 20px, 960px); margin-block: 18px 28px; padding: 20px 16px; border-radius: 16px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card { min-height: 170px; }
+  }
+</style>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJVJBLB4RQ"></script>
@@ -17,6 +111,35 @@
 
 </head>
 <body>
+<section class="projects-section" aria-labelledby="projects-title">
+  <p class="projects-eyebrow">PROJECTS</p>
+  <h1 id="projects-title">我的项目</h1>
+  <p class="projects-intro">两个可以直接在浏览器中使用的独立工具。点击项目将在新窗口打开，不会离开当前页面。</p>
+  <div class="projects-grid">
+    <a class="project-card" href="https://betaer.github.io/AiSignalGuard/" target="_blank" rel="noopener noreferrer">
+      <span class="project-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4.5 6.2v5.1c0 4.6 3.1 8.3 7.5 9.7 4.4-1.4 7.5-5.1 7.5-9.7V6.2L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.7 12 2.1 2.1 4.6-4.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="project-copy">
+        <span class="project-tag">数字身份与网络环境分析</span>
+        <h2>AI Signal Guard</h2>
+        <p>检查出口 IP、DNS、WebRTC、语言、时区和服务访问路径，帮助理解当前数字环境及其一致性。</p>
+        <span class="project-link-label">新窗口打开项目 ↗</span>
+      </span>
+    </a>
+    <a class="project-card" href="https://betaer.github.io/password-generator/" target="_blank" rel="noopener noreferrer">
+      <span class="project-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10M12 14v2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </span>
+      <span class="project-copy">
+        <span class="project-tag">本地密码与记忆短语生成</span>
+        <h2>Password Generator</h2>
+        <p>在浏览器本地生成随机密码、记忆短语和 PIN，并提供密码方案、强度分析与历史记录。</p>
+        <span class="project-link-label">新窗口打开项目 ↗</span>
+      </span>
+    </a>
+  </div>
+</section>
 <table>
 <thead>
     <tr>
