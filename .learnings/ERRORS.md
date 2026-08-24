@@ -113,3 +113,196 @@ apply_patch verification failed: invalid patch: multiple operations target tests
 - **Notes**: 拆分为删除和新增两次原子补丁后成功。
 
 ---
+
+## [ERR-20260825-004] exec-command-workdir
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+命令打算在自身创建制品目录前就把该目录设为工作目录，进程因此无法启动。
+
+### Error
+
+```text
+Failed to create unified exec process: No such file or directory
+```
+
+### Suggested Fix
+
+先从已存在的仓库根目录创建制品目录，再在后续命令中把它设为工作目录。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: output/playwright/homepage
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 分开创建目录与启动 Playwright 会话。
+
+---
+
+## [ERR-20260825-005] playwright-cli-network
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+当前 Playwright CLI 不支持参考文档中的 `network` 命令，实际命令名为 `requests`。
+
+### Error
+
+```text
+Unknown command: network
+```
+
+### Suggested Fix
+
+使用 `requests` 列出网络请求，再用 `request <index>` 查看详情。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: output/playwright/homepage
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 改用 `requests` 并确认静态资源与 Analytics 请求状态。
+
+---
+
+## [ERR-20260825-006] shell-test-workdir
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+从 Playwright 制品目录运行仓库测试 glob，zsh 因当前目录没有匹配文件而拒绝命令。
+
+### Error
+
+```text
+zsh: no matches found: tests/*.test.mjs
+```
+
+### Suggested Fix
+
+仓库测试始终从仓库根目录执行；Playwright CLI 命令才从制品目录执行。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: tests/seo.test.mjs
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 分离测试命令和浏览器命令的工作目录。
+
+---
+
+## [ERR-20260825-007] playwright-cli-run-code
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+当前 Playwright CLI 的 `run-code` 需要接收函数表达式，直接传入多条 `await page...` 语句会产生语法错误。
+
+### Error
+
+```text
+SyntaxError: Unexpected identifier 'page'
+```
+
+### Suggested Fix
+
+使用 `async (page) => { ... }` 包装多条 Playwright 操作。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: output/playwright/homepage
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 使用异步函数表达式后成功验证深色与减弱动画模式。
+
+---
+
+## [ERR-20260825-008] destructive-cleanup-policy
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tooling
+
+### Summary
+尝试删除本次生成的 Playwright 制品目录时，统一执行器拒绝了 `rm -rf` 风格命令。
+
+### Error
+
+```text
+rejected: rm -f style commands are not permitted. Use a safer approach
+```
+
+### Suggested Fix
+
+清理生成制品时优先移动到 `mktemp -d` 创建的临时隔离目录，保持可恢复性。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: output/playwright/homepage
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 改用临时隔离目录接收本次生成的浏览器制品。
+
+---
+
+## [ERR-20260825-009] manual-url-case-check
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+手工外链检查输入了错误的 GitHub Pages 大小写和连字符形式，产生了与页面实现无关的 404。
+
+### Error
+
+```text
+404 https://betaer.github.io/AI-Signal-Guard/
+404 https://betaer.github.io/Password-Generator/
+```
+
+### Suggested Fix
+
+从 `index.html` 或 `sitemap.xml` 直接提取链接进行检查，不要凭记忆重新输入大小写敏感路径。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: index.html, sitemap.xml
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 使用页面实际链接重新检查，两个在线入口和两个源码入口均返回 200。
+
+---
