@@ -7,6 +7,12 @@ const html = await readFile(new URL("index.html", root), "utf8");
 const robots = await readFile(new URL("robots.txt", root), "utf8");
 const sitemap = await readFile(new URL("sitemap.xml", root), "utf8");
 const socialPreview = await readFile(new URL("assets/social-preview.png", root));
+const projectPreviewFiles = [
+  "assets/ai-signal-guard-preview-600.webp",
+  "assets/ai-signal-guard-preview-1200.webp",
+  "assets/password-generator-preview-600.webp",
+  "assets/password-generator-preview-1200.webp",
+];
 const jsonLdPayload = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 
 const domains = [
@@ -50,7 +56,7 @@ test("根首页元数据同时描述项目与域名资产", () => {
 });
 
 test("根首页声明站内图标与首屏预加载图片", () => {
-  assert.match(html, /<link rel="icon" type="image\/png" href="\/assets\/social-preview\.png">/);
+  assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/assets\/favicon\.svg">/);
   assert.match(html, /<link rel="preload" as="image" href="\/assets\/social-preview\.png" fetchpriority="high">/);
 });
 
@@ -69,6 +75,7 @@ test("JSON-LD 分别建立项目列表与域名列表", () => {
   const page = graph.find((entry) => entry["@id"] === "https://betaer.github.io/#webpage");
   assert.equal(projects.numberOfItems, 2);
   assert.equal(portfolio.numberOfItems, domains.length);
+  assert.equal(portfolio.itemListOrder, "https://schema.org/ItemListUnordered");
   assert.equal(portfolio.itemListElement.length, domains.length);
   assert.deepEqual(page.hasPart, [
     { "@id": "https://betaer.github.io/#projects" },
@@ -90,6 +97,7 @@ test("页面使用语义分区和稳定页内导航", () => {
   assert.match(html, /<section[^>]*id="principles"/);
   assert.match(html, /<section[^>]*id="domains"/);
   assert.match(html, /<footer[^>]*id="contact"/);
+  assert.match(html, /<nav class="contact-links" aria-label="联系方式">/);
 });
 
 test("两个工具同时提供在线入口与源码入口", () => {
@@ -104,6 +112,22 @@ test("两个工具同时提供在线入口与源码入口", () => {
   assert.match(html, /AI Signal Guard/);
   assert.match(html, /Password Generator/);
   assert.match(html, /浏览器本地/);
+});
+
+test("项目卡片使用本地响应式 WebP 并保持 1200 比 630 比例", async () => {
+  assert.match(html, /src="\/assets\/ai-signal-guard-preview-600\.webp"/);
+  assert.match(html, /src="\/assets\/password-generator-preview-600\.webp"/);
+  assert.match(html, /srcset="\/assets\/ai-signal-guard-preview-600\.webp 600w, \/assets\/ai-signal-guard-preview-1200\.webp 1200w"/);
+  assert.match(html, /srcset="\/assets\/password-generator-preview-600\.webp 600w, \/assets\/password-generator-preview-1200\.webp 1200w"/);
+  assert.match(html, /\.project-media \{[\s\S]*?aspect-ratio:\s*1200 \/ 630;/);
+  assert.match(html, /\.project-media img \{[\s\S]*?height:\s*100%;[\s\S]*?object-fit:\s*cover;/);
+
+  for (const file of projectPreviewFiles) {
+    const image = await readFile(new URL(file, root));
+    assert.equal(image.subarray(0, 4).toString("ascii"), "RIFF", file);
+    assert.equal(image.subarray(8, 12).toString("ascii"), "WEBP", file);
+    assert.ok(image.byteLength < 250_000, `${file} 体积过大：${image.byteLength}`);
+  }
 });
 
 test("域名区完整保留并规范化 24 个域名", () => {

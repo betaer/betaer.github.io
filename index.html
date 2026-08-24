@@ -12,7 +12,7 @@
   <meta name="theme-color" content="#1769e0">
   <link rel="canonical" href="https://betaer.github.io/">
   <link rel="sitemap" type="application/xml" href="https://betaer.github.io/sitemap.xml">
-  <link rel="icon" type="image/png" href="/assets/social-preview.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="preload" as="image" href="/assets/social-preview.png" fetchpriority="high">
 
   <meta property="og:type" content="website">
@@ -131,7 +131,7 @@
         "name": "betaer 域名资产",
         "description": "betaer 管理的域名名称与中文含义。",
         "numberOfItems": 24,
-        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "itemListOrder": "https://schema.org/ItemListUnordered",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "codeis.law", "description": "Code is law，代码即法律" },
           { "@type": "ListItem", "position": 2, "name": "bifenle.com", "description": "比分乐" },
@@ -425,12 +425,14 @@
     }
     .project-media {
       overflow: hidden;
+      aspect-ratio: 1200 / 630;
       border-bottom: 1px solid var(--line);
       background: var(--surface-soft);
     }
     .project-media img {
+      display: block;
       width: 100%;
-      aspect-ratio: 1200 / 630;
+      height: 100%;
       object-fit: cover;
     }
     .project-body {
@@ -698,7 +700,7 @@
         <p class="hero-summary">betaer 构建网络隐私检测和本地凭据工具，同时管理一组域名资产。</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">查看项目</a>
-          <a class="button button-secondary" href="https://github.com/betaer" target="_blank" rel="noopener noreferrer">浏览 GitHub</a>
+          <a class="button button-secondary" href="https://github.com/betaer" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
       <figure class="hero-visual">
@@ -714,7 +716,7 @@
       <div class="project-list">
         <article class="project project-primary">
           <div class="project-media">
-            <img src="https://betaer.github.io/AiSignalGuard/tuiguang/social-preview.png" width="1200" height="630" loading="lazy" alt="AI Signal Guard 网络与浏览器隐私检测界面预览">
+            <img src="/assets/ai-signal-guard-preview-600.webp" srcset="/assets/ai-signal-guard-preview-600.webp 600w, /assets/ai-signal-guard-preview-1200.webp 1200w" sizes="(max-width: 768px) calc(100vw - 40px), 620px" width="1200" height="630" loading="lazy" decoding="async" alt="AI Signal Guard 网络与浏览器隐私检测界面预览">
           </div>
           <div class="project-body">
             <p class="project-category">网络与浏览器隐私检测</p>
@@ -733,7 +735,7 @@
 
         <article class="project">
           <div class="project-media">
-            <img src="https://betaer.github.io/password-generator/assets/social-preview.png" width="1200" height="630" loading="lazy" alt="Password Generator 本地密码生成工具界面预览">
+            <img src="/assets/password-generator-preview-600.webp" srcset="/assets/password-generator-preview-600.webp 600w, /assets/password-generator-preview-1200.webp 1200w" sizes="(max-width: 768px) calc(100vw - 40px), 480px" width="1200" height="630" loading="lazy" decoding="async" alt="Password Generator 本地密码生成工具界面预览">
           </div>
           <div class="project-body">
             <p class="project-category">本地密码与记忆短语生成</p>
@@ -816,12 +818,12 @@
           <h2>项目合作或域名咨询</h2>
           <p class="footer-copy">请在联系时说明项目名称或具体域名，便于直接处理。</p>
         </div>
-        <div class="contact-links" aria-label="联系方式">
-          <a href="https://github.com/betaer" target="_blank" rel="noopener noreferrer">GitHub / betaer</a>
+        <nav class="contact-links" aria-label="联系方式">
+          <a href="https://github.com/betaer" target="_blank" rel="noopener noreferrer">GitHub</a>
           <span>邮箱：DownBer # Gmail.com（请将 # 替换为 @）</span>
           <a href="https://jq.qq.com/?_wv=1027&amp;k=wWOQVzep" target="_blank" rel="noopener noreferrer">QQ 联系方式 1</a>
           <a href="https://qm.qq.com/cgi-bin/qm/qr?k=Cmt-5FPQsfNBFyTz3aCK7UUkTfhuy-30&amp;noverify=0" target="_blank" rel="noopener noreferrer">QQ 联系方式 2</a>
-        </div>
+        </nav>
       </div>
       <div class="shell footer-meta">
         <span>浏览器安全工具与域名资产</span>
