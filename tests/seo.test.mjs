@@ -49,6 +49,11 @@ test("根首页元数据同时描述项目与域名资产", () => {
   assert.doesNotMatch(html, /noindex|nofollow|noimageindex/i);
 });
 
+test("根首页声明站内图标与首屏预加载图片", () => {
+  assert.match(html, /<link rel="icon" type="image\/png" href="\/assets\/social-preview\.png">/);
+  assert.match(html, /<link rel="preload" as="image" href="\/assets\/social-preview\.png" fetchpriority="high">/);
+});
+
 test("JSON-LD 分别建立项目列表与域名列表", () => {
   assert.ok(jsonLdPayload, "缺少 JSON-LD");
   const graph = JSON.parse(jsonLdPayload)["@graph"];
