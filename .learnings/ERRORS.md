@@ -37,3 +37,41 @@ apply_patch verification failed: invalid hunk at line 740, 'git status --short' 
 - **Notes**: 重新生成格式完整的新增文件补丁。
 
 ---
+
+## [ERR-20260825-002] apply_patch
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+同一补丁同时 `Delete File` 与 `Add File` 相同路径会被 `apply_patch` 拒绝。
+
+### Error
+
+```text
+apply_patch verification failed: invalid patch: multiple operations target tests/seo.test.mjs
+```
+
+### Context
+
+- 操作：完整替换测试文件。
+- 原因：补丁工具不允许单个补丁对同一路径执行多种文件级操作。
+
+### Suggested Fix
+
+完整替换文件时使用单个 `Update File`，或把 `Delete File` 与 `Add File` 分成两次补丁调用。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: tests/seo.test.mjs
+- See Also: ERR-20260825-001
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 拆分为删除和新增两次原子补丁后成功。
+
+---
