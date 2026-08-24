@@ -342,3 +342,35 @@ OSError: [Errno 48] Address already in use
 - **Notes**: 保留占用 8765 的既有进程，改用 8876 进行本次浏览器验证。
 
 ---
+
+## [ERR-20260825-011] preflight-shell-quoting
+
+**Logged**: 2026-08-25T07:30:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+把 Lighthouse、Node 解析和包含单双引号的正则扫描组合进同一条 Shell 命令，导致 zsh 在执行前发现引号未闭合。
+
+### Error
+
+```text
+zsh:7: unmatched "
+```
+
+### Suggested Fix
+
+将 Lighthouse 和复杂正则扫描拆成独立命令；正则包含引号时避免嵌套在同一段 Shell 字符串中。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: index.html
+
+### Resolution
+
+- **Resolved**: 2026-08-25T07:30:00+08:00
+- **Notes**: 改为分别运行 Lighthouse、报告解析和页面文本扫描。
+
+---
