@@ -105,6 +105,8 @@ apply_patch verification failed: invalid patch: multiple operations target tests
 
 - Reproducible: yes
 - Related Files: tests/seo.test.mjs
+- Recurrence-Count: 2
+- Last-Seen: 2026-08-25
 - See Also: ERR-20260825-001
 
 ### Resolution
@@ -208,7 +210,7 @@ zsh: no matches found: tests/*.test.mjs
 ### Resolution
 
 - **Resolved**: 2026-08-25T00:00:00+08:00
-- **Notes**: 分离测试命令和浏览器命令的工作目录。
+- **Notes**: 分离测试命令和浏览器命令的工作目录；2026-08-25 再次把 Git 状态检查放进 Playwright 临时目录，改回仓库根目录后重跑。
 
 ---
 
