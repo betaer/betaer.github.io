@@ -13,7 +13,6 @@
   <link rel="canonical" href="https://betaer.github.io/">
   <link rel="sitemap" type="application/xml" href="https://betaer.github.io/sitemap.xml">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="preload" as="image" href="/assets/social-preview.png" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="betaer 项目与域名主页">
@@ -54,7 +53,10 @@
         "@id": "https://betaer.github.io/#author",
         "name": "betaer",
         "url": "https://github.com/betaer",
-        "sameAs": ["https://github.com/betaer"]
+        "sameAs": [
+          "https://github.com/betaer",
+          "https://x.com/betaer"
+        ]
       },
       {
         "@type": "CollectionPage",
@@ -292,95 +294,11 @@
     }
     .site-header nav a:hover { color: var(--accent-strong); }
 
-    .hero {
-      display: grid;
-      min-height: min(690px, calc(100dvh - 72px));
-      grid-template-columns: minmax(0, 1.05fr) minmax(340px, .65fr);
-      align-items: center;
-      gap: clamp(42px, 7vw, 88px);
-      padding-block: clamp(58px, 9vh, 88px);
-    }
-    .eyebrow {
-      margin: 0 0 18px;
-      color: var(--accent-strong);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .17em;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      max-width: 760px;
-      margin: 0;
-      color: var(--text-strong);
-      font-size: clamp(42px, 5.2vw, 62px);
-      font-weight: 790;
-      letter-spacing: -.065em;
-      line-height: 1.06;
-      text-wrap: balance;
-    }
-    .hero-summary {
-      max-width: 580px;
-      margin: 24px 0 0;
-      color: var(--muted);
-      font-size: clamp(17px, 2vw, 20px);
-      line-height: 1.75;
-      text-wrap: pretty;
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 32px;
-    }
-    .button {
-      display: inline-flex;
-      min-height: 46px;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 20px;
-      border: 1px solid transparent;
-      border-radius: var(--radius-control);
-      font-size: 14px;
-      font-weight: 760;
-      line-height: 1;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
-    }
-    .button:hover { transform: translateY(-2px); }
-    .button:active { transform: translateY(0); }
-    .button-primary {
-      color: #f6f9fd;
-      background: #135dbf;
-      box-shadow: 0 9px 24px rgba(19, 93, 191, .2);
-    }
-    .button-primary:hover { background: #0d4fae; }
-    .button-secondary {
-      color: var(--text-strong);
-      border-color: var(--line-strong);
-      background: var(--surface);
-    }
-    .button-secondary:hover { border-color: var(--accent); }
-    .hero-visual {
-      margin: 0;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      transform: rotate(1.3deg);
-    }
-    .hero-visual img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 1200 / 630;
-      object-fit: cover;
-    }
-
     .section-heading {
       max-width: 700px;
       margin-bottom: 34px;
     }
+    .section-heading h1,
     .section-heading h2,
     .principles h2,
     .site-footer h2 {
@@ -398,7 +316,8 @@
     }
 
     .projects {
-      padding-block: clamp(82px, 10vw, 126px);
+      min-height: calc(100dvh - 72px);
+      padding-block: clamp(44px, 6vw, 68px) clamp(76px, 8vw, 104px);
       scroll-margin-top: 86px;
     }
     .project-list {
@@ -447,7 +366,7 @@
       font-size: 13px;
       font-weight: 760;
     }
-    .project h3 {
+    .project h2 {
       margin: 0;
       color: var(--text-strong);
       font-size: clamp(25px, 3vw, 34px);
@@ -578,8 +497,7 @@
       gap: 0;
       border-top: 1px solid var(--line);
     }
-    .contact-links a,
-    .contact-links span {
+    .contact-links a {
       min-width: 0;
       padding: 14px 0;
       border-bottom: 1px solid var(--line);
@@ -607,12 +525,6 @@
     .footer-meta a { color: var(--text); text-underline-offset: 4px; }
 
     @media (max-width: 900px) {
-      .hero {
-        min-height: auto;
-        grid-template-columns: 1fr;
-        gap: 38px;
-      }
-      .hero-visual { max-width: 720px; transform: none; }
       .principles-inner { grid-template-columns: 1fr; }
       .project-list { grid-template-columns: 1fr; }
     }
@@ -624,14 +536,11 @@
       .site-header nav { gap: 15px; }
       .site-header nav a { font-size: 13px; }
       .nav-github { display: none; }
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding-block: 46px 58px;
+      .projects {
+        min-height: calc(100dvh - 64px);
+        padding-block: 36px 72px;
       }
-      .hero h1 { font-size: clamp(40px, 12vw, 54px); }
-      .hero-summary { margin-top: 18px; font-size: 17px; }
-      .hero-actions { margin-top: 24px; }
+      .section-heading { margin-bottom: 28px; }
       .project-list,
       .principle-list,
       .domain-grid,
@@ -644,8 +553,6 @@
 
     @media (max-width: 430px) {
       .site-header nav { gap: 12px; }
-      .button { min-height: 44px; }
-      .hero-visual { border-radius: 14px; }
       .project-body { padding: 22px; }
       .domain-item {
         grid-template-columns: 1fr;
@@ -693,34 +600,19 @@
   </header>
 
   <main id="main-content">
-    <section class="hero shell" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Browser security tools</p>
-        <h1 id="hero-title">可信的浏览器工具，清楚的安全边界。</h1>
-        <p class="hero-summary">betaer 构建网络隐私检测和本地凭据工具，同时管理一组域名资产。</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#projects">查看项目</a>
-          <a class="button button-secondary" href="https://github.com/betaer" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </div>
-      </div>
-      <figure class="hero-visual">
-        <img src="/assets/social-preview.png" width="1200" height="630" fetchpriority="high" alt="betaer 的两个浏览器安全工具：AI Signal Guard 与 Password Generator">
-      </figure>
-    </section>
-
     <section class="projects shell" id="projects" aria-labelledby="projects-title">
       <header class="section-heading">
-        <h2 id="projects-title">浏览器安全工具</h2>
+        <h1 id="projects-title">浏览器安全工具</h1>
         <p>两个可以直接使用、也可以公开审计的独立项目。</p>
       </header>
       <div class="project-list">
         <article class="project project-primary">
           <div class="project-media">
-            <img src="/assets/ai-signal-guard-preview-600.webp" srcset="/assets/ai-signal-guard-preview-600.webp 600w, /assets/ai-signal-guard-preview-1200.webp 1200w" sizes="(max-width: 768px) calc(100vw - 40px), 620px" width="1200" height="630" loading="lazy" decoding="async" alt="AI Signal Guard 网络与浏览器隐私检测界面预览">
+            <img src="/assets/ai-signal-guard-preview-600.webp" srcset="/assets/ai-signal-guard-preview-600.webp 600w, /assets/ai-signal-guard-preview-1200.webp 1200w" sizes="(max-width: 768px) calc(100vw - 28px), 620px" width="1200" height="630" loading="eager" fetchpriority="high" decoding="async" alt="AI Signal Guard 网络与浏览器隐私检测界面预览">
           </div>
           <div class="project-body">
             <p class="project-category">网络与浏览器隐私检测</p>
-            <h3>AI Signal Guard</h3>
+            <h2>AI Signal Guard</h2>
             <p class="project-description">检查公网 IPv4/IPv6、DNS、WebRTC、浏览器指纹和 AI 服务连通性，并如实展示来源、失败与超时。</p>
             <dl class="project-boundary">
               <dt>处理边界</dt>
@@ -739,7 +631,7 @@
           </div>
           <div class="project-body">
             <p class="project-category">本地密码与记忆短语生成</p>
-            <h3>Password Generator</h3>
+            <h2>Password Generator</h2>
             <p class="project-description">使用 Web Crypto API 在浏览器本地生成随机密码、记忆短语和 PIN，并根据实际结果分析强度。</p>
             <dl class="project-boundary">
               <dt>处理边界</dt>
@@ -820,7 +712,7 @@
         </div>
         <nav class="contact-links" aria-label="联系方式">
           <a href="https://github.com/betaer" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <span>邮箱：DownBer # Gmail.com（请将 # 替换为 @）</span>
+          <a href="https://x.com/betaer" target="_blank" rel="noopener noreferrer">X / @betaer</a>
           <a href="https://jq.qq.com/?_wv=1027&amp;k=wWOQVzep" target="_blank" rel="noopener noreferrer">QQ 联系方式 1</a>
           <a href="https://qm.qq.com/cgi-bin/qm/qr?k=Cmt-5FPQsfNBFyTz3aCK7UUkTfhuy-30&amp;noverify=0" target="_blank" rel="noopener noreferrer">QQ 联系方式 2</a>
         </nav>

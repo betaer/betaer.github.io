@@ -55,9 +55,9 @@ test("根首页元数据同时描述项目与域名资产", () => {
   assert.doesNotMatch(html, /noindex|nofollow|noimageindex/i);
 });
 
-test("根首页声明站内图标与首屏预加载图片", () => {
+test("根首页声明站内图标且不预加载已删除的 Hero 资源", () => {
   assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/assets\/favicon\.svg">/);
-  assert.match(html, /<link rel="preload" as="image" href="\/assets\/social-preview\.png" fetchpriority="high">/);
+  assert.doesNotMatch(html, /<link rel="preload"[^>]*href="\/assets\/(?:social-preview\.png|ai-signal-guard-preview-[^"]+)"/);
 });
 
 test("JSON-LD 分别建立项目列表与域名列表", () => {
@@ -98,6 +98,20 @@ test("页面使用语义分区和稳定页内导航", () => {
   assert.match(html, /<section[^>]*id="domains"/);
   assert.match(html, /<footer[^>]*id="contact"/);
   assert.match(html, /<nav class="contact-links" aria-label="联系方式">/);
+});
+
+test("浏览器安全工具直接成为首屏主体", () => {
+  const main = html.match(/<main id="main-content">([\s\S]*?)<\/main>/)?.[1];
+  const projects = html.match(/<section class="projects shell"[^>]*id="projects"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(main, "缺少主要内容");
+  assert.ok(projects, "缺少项目分区");
+  assert.match(main, /^\s*<section class="projects shell" id="projects"/);
+  assert.match(projects, /<h1 id="projects-title">浏览器安全工具<\/h1>/);
+  assert.match(projects, /<h2>AI Signal Guard<\/h2>/);
+  assert.match(projects, /<h2>Password Generator<\/h2>/);
+  assert.doesNotMatch(projects, /<h3>/);
+  assert.match(projects, /<img[^>]*ai-signal-guard-preview-600\.webp[^>]*loading="eager"[^>]*fetchpriority="high"/);
+  assert.doesNotMatch(main, /class="hero|可信的浏览器工具|清楚的安全边界|hero-summary|hero-actions|hero-visual/);
 });
 
 test("两个工具同时提供在线入口与源码入口", () => {
@@ -153,6 +167,11 @@ test("外部链接与动效具备基础安全和可访问性", () => {
   assert.match(html, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /@media \(prefers-color-scheme: dark\)/);
   assert.match(html, /@media \(max-width: 768px\)/);
+});
+
+test("联系区使用 X 账号而不是明文邮箱", () => {
+  assert.match(html, /<a href="https:\/\/x\.com\/betaer" target="_blank" rel="noopener noreferrer">X \/ @betaer<\/a>/);
+  assert.doesNotMatch(html, /DownBer|Gmail\.com|请将 # 替换为 @/);
 });
 
 test("页面文案没有禁止的长破折号和装饰性滚动提示", () => {
