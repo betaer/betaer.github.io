@@ -114,6 +114,19 @@ test("浏览器安全工具直接成为首屏主体", () => {
   assert.doesNotMatch(main, /class="hero|可信的浏览器工具|清楚的安全边界|hero-summary|hero-actions|hero-visual/);
 });
 
+test("项目、原则与域名分区使用紧凑的纵向节奏", () => {
+  const style = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] || "";
+  const projectsRule = style.match(/\.projects\s*\{([^}]*)\}/)?.[1] || "";
+  const principlesRule = style.match(/\.principles\s*\{([^}]*)\}/)?.[1] || "";
+  const domainsRule = style.match(/\.domains\s*\{([^}]*)\}/)?.[1] || "";
+
+  assert.doesNotMatch(projectsRule, /min-height/);
+  assert.match(projectsRule, /padding-block:\s*clamp\(44px, 6vw, 68px\) clamp\(48px, 5vw, 64px\)/);
+  assert.match(principlesRule, /padding-block:\s*clamp\(56px, 6vw, 78px\)/);
+  assert.match(domainsRule, /padding-block:\s*clamp\(60px, 7vw, 92px\)/);
+  assert.match(style, /@media \(max-width: 768px\)[\s\S]*?\.projects\s*\{[^}]*padding-block:\s*32px 52px[^}]*\}[\s\S]*?\.principles\s*\{[^}]*padding-block:\s*48px[^}]*\}[\s\S]*?\.domains\s*\{[^}]*padding-block:\s*56px[^}]*\}/);
+});
+
 test("两个工具同时提供在线入口与源码入口", () => {
   for (const url of [
     "https://betaer.github.io/AiSignalGuard/",
