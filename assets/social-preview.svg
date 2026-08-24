@@ -16,9 +16,9 @@
   <circle cx="134" cy="99" r="8" fill="#e6b94f"/>
   <circle cx="160" cy="99" r="8" fill="#65ad7b"/>
   <text x="198" y="106" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">https://betaer.github.io/</text>
-  <text x="110" y="205" fill="#1677ff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">BROWSER TOOLS</text>
-  <text x="110" y="270" fill="#172033" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">betaer Projects</text>
-  <text x="110" y="312" fill="#5f6f86" font-family="Arial, Helvetica, sans-serif" font-size="22">Privacy-first tools that run directly in your browser</text>
+  <text x="110" y="205" fill="#1769e0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">PROJECTS &amp; DOMAINS</text>
+  <text x="110" y="270" fill="#172033" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">betaer</text>
+  <text x="110" y="312" fill="#5d6c82" font-family="Arial, Helvetica, sans-serif" font-size="22">Browser security tools and a curated domain portfolio</text>
   <rect x="110" y="365" width="455" height="132" rx="20" fill="#f4faf7" stroke="#cae5d7"/>
   <path d="M157 393 132 404v18c0 23 10 39 25 47 15-8 25-24 25-47v-18l-25-11Z" fill="none" stroke="#159868" stroke-width="5" stroke-linejoin="round"/>
   <path d="m145 430 9 9 17-19" fill="none" stroke="#159868" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -29,4 +29,5 @@
   <path d="M633 414v-14a16 16 0 0 1 32 0v14M649 432v12" fill="none" stroke="#1677ff" stroke-width="5" stroke-linecap="round"/>
   <text x="706" y="421" fill="#172033" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Password Generator</text>
   <text x="706" y="459" fill="#526079" font-family="Arial, Helvetica, sans-serif" font-size="18">Local passwords, passphrases &amp; PINs</text>
+  <text x="110" y="535" fill="#5d6c82" font-family="Arial, Helvetica, sans-serif" font-size="18">24 domains | codeis.law | betaer.com | youyue.app</text>
 </svg>
