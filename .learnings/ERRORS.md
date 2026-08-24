@@ -138,11 +138,13 @@ Failed to create unified exec process: No such file or directory
 
 - Reproducible: yes
 - Related Files: output/playwright/homepage
+- Recurrence-Count: 2
+- Last-Seen: 2026-08-25
 
 ### Resolution
 
 - **Resolved**: 2026-08-25T00:00:00+08:00
-- **Notes**: 分开创建目录与启动 Playwright 会话。
+- **Notes**: 分开创建目录与启动 Playwright 会话；2026-08-25 再次复发，继续采用先创建、后切换工作目录的两步方式。
 
 ---
 
@@ -304,5 +306,37 @@ rejected: rm -f style commands are not permitted. Use a safer approach
 
 - **Resolved**: 2026-08-25T00:00:00+08:00
 - **Notes**: 使用页面实际链接重新检查，两个在线入口和两个源码入口均返回 200。
+
+---
+
+## [ERR-20260825-010] local-preview-port-conflict
+
+**Logged**: 2026-08-25T05:40:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: tests
+
+### Summary
+启动主页本地预览时固定端口 8765 已被另一个 Python 进程占用。
+
+### Error
+
+```text
+OSError: [Errno 48] Address already in use
+```
+
+### Suggested Fix
+
+启动预览前检查端口，若占用来源不属于当前任务，则使用独立端口，不终止不明进程。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: index.html
+
+### Resolution
+
+- **Resolved**: 2026-08-25T05:40:00+08:00
+- **Notes**: 保留占用 8765 的既有进程，改用 8876 进行本次浏览器验证。
 
 ---
