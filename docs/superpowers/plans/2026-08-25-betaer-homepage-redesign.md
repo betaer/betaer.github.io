@@ -480,9 +480,14 @@ git commit -m "feat: rebuild betaer homepage"
 - [ ] **Step 2: 导出 1200 x 630 PNG**
 
 ```bash
-preview_tmp_dir=$(mktemp -d)
-qlmanage -t -s 1200 -o "$preview_tmp_dir" assets/social-preview.svg >/dev/null 2>&1
-sips --cropToHeightWidth 630 1200 "$preview_tmp_dir/social-preview.svg.png" --out assets/social-preview.png >/dev/null
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new \
+  --disable-gpu \
+  --hide-scrollbars \
+  --force-device-scale-factor=1 \
+  --window-size=1200,630 \
+  --screenshot="$(pwd)/assets/social-preview.png" \
+  "file://$(pwd)/assets/social-preview.svg"
 sips -g pixelWidth -g pixelHeight assets/social-preview.png
 ```
 

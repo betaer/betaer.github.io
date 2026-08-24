@@ -38,6 +38,44 @@ apply_patch verification failed: invalid hunk at line 740, 'git status --short' 
 
 ---
 
+## [ERR-20260825-003] qlmanage-svg-render
+
+**Logged**: 2026-08-25T00:00:00+08:00
+**Priority**: medium
+**Status**: resolved
+**Area**: frontend
+
+### Summary
+Quick Look 把 1200 x 630 SVG 先缩放进方形缩略图，再居中裁切，输出尺寸正确但内容被放大并截断。
+
+### Error
+
+```text
+PNG reports 1200 x 630, but the right project card is clipped after qlmanage plus sips cropping.
+```
+
+### Context
+
+- 操作：`qlmanage -t -s 1200` 后使用 `sips --cropToHeightWidth 630 1200`。
+- 原因：Quick Look 的 `-s` 表示方形缩略图边长，不是 SVG 原始画布宽度。
+- 影响：自动尺寸测试通过，但社交预览视觉内容错误。
+
+### Suggested Fix
+
+使用 Chrome headless，以 `--window-size=1200,630` 和 `--force-device-scale-factor=1` 直接截图 SVG 根文档；完成后仍需人工查看 PNG。
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: assets/social-preview.svg, assets/social-preview.png
+
+### Resolution
+
+- **Resolved**: 2026-08-25T00:00:00+08:00
+- **Notes**: 改用 Chrome headless 后完整保留 1200 x 630 画布内容。
+
+---
+
 ## [ERR-20260825-002] apply_patch
 
 **Logged**: 2026-08-25T00:00:00+08:00
