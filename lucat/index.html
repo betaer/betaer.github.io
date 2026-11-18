@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://betaer.github.io/lucat/">
   <link rel="icon" type="image/webp" href="assets/images/lucat-icon.webp">
   <link rel="stylesheet" href="assets/css/landing.css">
+  <script defer src="assets/js/support-email.js"></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="LuCat">
   <meta property="og:locale" content="en_US">
@@ -62,29 +63,49 @@
       </div>
       <div class="feature-grid">
         <article class="feature">
-          <div class="feature-visual feature-visual--green">
+          <a class="feature-shot" href="assets/images/daily-progress.webp">
             <img src="assets/images/daily-progress.webp" width="780" height="1696" loading="lazy"
-              alt="Petting rings on a monthly calendar show progress toward a daily goal.">
-          </div>
+              alt="How much time together today? An iPhone calendar shows daily petting rings.">
+          </a>
           <h3>See your daily progress</h3>
           <p>Follow a daily petting goal, browse your calendar, and set a reminder when you want one.</p>
         </article>
         <article class="feature">
-          <div class="feature-visual feature-visual--lilac">
+          <a class="feature-shot" href="assets/images/time-by-cat.webp">
             <img src="assets/images/time-by-cat.webp" width="780" height="1696" loading="lazy"
-              alt="A cat’s individual session history displays the time spent together.">
-          </div>
+              alt="Time with each cat. Separate bar charts show the minutes spent with Luna and Milo on iPhone.">
+          </a>
           <h3>Keep a record for each cat</h3>
           <p>Give each cat a profile and switch between them to see their individual petting history.</p>
         </article>
-        <article class="feature">
-          <div class="feature-visual feature-visual--mint">
-            <img src="assets/images/weight-trends.webp" width="920" height="1227" loading="lazy"
-              alt="LuCat on iPad displaying a cat’s weight history as a line chart.">
-          </div>
-          <h3>Watch weight change over time</h3>
-          <p>Log weigh-ins in pounds or kilograms and view your cat’s weight trend on a chart.</p>
-        </article>
+        <div class="feature-stack">
+          <article class="feature">
+            <a class="feature-shot" href="assets/images/duo-weight-trends.webp">
+              <img src="assets/images/duo-weight-trends.webp" width="1160" height="816" loading="lazy"
+                alt="Track changes in weight. A landscape iPhone Duo chart compares Luna’s and Milo’s weigh-ins.">
+            </a>
+            <h3>Watch weight change over time</h3>
+            <p>Log weigh-ins in pounds or kilograms and view your cat’s weight trend on a chart.</p>
+          </article>
+          <article class="feature">
+            <div class="watch-gallery">
+              <a href="assets/images/watch-start.webp">
+                <img src="assets/images/watch-start.webp" width="416" height="496" loading="lazy"
+                  alt="Apple Watch showing Milo selected and the Start button.">
+              </a>
+              <a href="assets/images/watch-switch-cat.webp">
+                <img src="assets/images/watch-switch-cat.webp" width="416" height="496" loading="lazy"
+                  alt="Switch Cat on Apple Watch, with Milo selected and Luna available.">
+              </a>
+              <a href="assets/images/watch-time-with-luna.webp">
+                <img src="assets/images/watch-time-with-luna.webp" width="416" height="496" loading="lazy"
+                  alt="Luna’s Apple Watch summary shows total petting time and average session length.">
+              </a>
+            </div>
+            <h3>Start from your wrist</h3>
+            <p>Start a petting session, switch cats, or check how much time you’ve spent together on Apple Watch.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -94,7 +115,12 @@
         <p>Get help with Apple Watch sync, your records, or the app’s settings.</p>
       </div>
       <ul class="contact-links">
-        <li><a href="mailto:betaer@live.com"><strong>Email support</strong><span>betaer@live.com</span></a></li>
+        <li>
+          <a data-support-email>
+            <strong>Email support</strong>
+            <span data-email-label="Open your email app"><img src="assets/images/support-address.png" width="140" height="24" alt="Support email address"></span>
+          </a>
+        </li>
         <li><a href="https://docs.qq.com/doc/DVmpqSXpBYmVsdnZK"><strong>Share feedback</strong><span>Tencent Docs</span></a></li>
       </ul>
     </section>
@@ -102,7 +128,11 @@
 
   <footer class="site-footer wrap">
     <span>LuCat</span>
-    <a href="privacy/?lang=en">Privacy Policy</a>
+    <nav aria-label="Footer">
+      <a href="https://x.com/intent/user?screen_name=betaer" aria-label="Developer @Betaer on X">Developer · 𝕏 @Betaer</a>
+      <a href="https://x.com/i/chat/group_join/g2122385444969349533/55EEg15kcr" aria-label="LuCat feedback group on X">Feedback · 𝕏 Group</a>
+      <a href="privacy/?lang=en">Privacy Policy</a>
+    </nav>
   </footer>
 </body>
 </html>
