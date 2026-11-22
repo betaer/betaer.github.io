@@ -1,0 +1,66 @@
+name: Publish website with LuCat translations
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: betaer/LuCat
+          ref: main
+          path: _lucat_source
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/*.test.mjs
+      - name: Build and validate LuCat
+        run: |
+          python3 _lucat_source/scripts/build.py
+          python3 _lucat_source/scripts/check.py
+      - name: Assemble website and sitemap
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil
+          import xml.etree.ElementTree as ET
+          shutil.copytree('.', '_site', ignore=shutil.ignore_patterns('.git', '.github', '_site', '_lucat_source', '.learnings', 'node_modules'))
+          shutil.rmtree('_site/lucat')
+          shutil.copytree('_lucat_source/dist', '_site/lucat')
+          ns = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+          ET.register_namespace('', ns)
+          tree = ET.parse('_site/sitemap.xml')
+          root = tree.getroot()
+          existing = {el.text for el in root.iter(f'{{{ns}}}loc')}
+          for entry in ET.parse('_site/lucat/sitemap.xml').getroot():
+              loc = entry.find(f'{{{ns}}}loc').text
+              if loc not in existing:
+                  root.append(entry)
+          tree.write('_site/sitemap.xml', encoding='utf-8', xml_declaration=True)
+          Path('_site/.nojekyll').touch()
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
