@@ -2,12 +2,13 @@
 
 betaer 的公开项目与域名主页，使用纯静态 HTML、CSS 和 JSON-LD 构建。
 
-[访问主页](https://betaer.github.io/) | [AI Signal Guard](https://betaer.github.io/AiSignalGuard/) | [Password Generator](https://betaer.github.io/password-generator/)
+[访问主页](https://betaer.github.io/) | [AI Signal Guard](https://betaer.github.io/AiSignalGuard/) | [Password Generator](https://betaer.github.io/password-generator/) | [LuCat 撸猫](https://betaer.github.io/lucat/zh-Hans/)
 
 ## 页面内容
 
 - AI Signal Guard：网络、浏览器隐私与环境一致性检测。
 - Password Generator：浏览器本地密码、记忆短语与 PIN 生成。
+- LuCat 撸猫：Apple Watch 撸猫计时、每只猫的陪伴记录与体重趋势。
 - Domain Portfolio：betaer 管理的域名名称与含义。
 
 ## 本地预览

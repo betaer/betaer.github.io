@@ -12,6 +12,8 @@ const projectPreviewFiles = [
   "assets/ai-signal-guard-preview-1200.webp",
   "assets/password-generator-preview-600.webp",
   "assets/password-generator-preview-1200.webp",
+  "assets/lucat-preview-600.webp",
+  "assets/lucat-preview-1200.webp",
 ];
 const jsonLdPayload = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 
@@ -68,12 +70,12 @@ test("JSON-LD 分别建立项目列表与域名列表", () => {
   assert.ok(graph.some((entry) => entry["@type"] === "Person"));
   assert.ok(graph.some((entry) => entry["@type"] === "CollectionPage"));
   assert.ok(graph.some((entry) => entry["@type"] === "BreadcrumbList"));
-  assert.equal(graph.filter((entry) => entry["@type"] === "SoftwareApplication").length, 2);
+  assert.equal(graph.filter((entry) => entry["@type"] === "SoftwareApplication").length, 3);
 
   const projects = graph.find((entry) => entry["@id"] === "https://betaer.github.io/#projects");
   const portfolio = graph.find((entry) => entry["@id"] === "https://betaer.github.io/#domains");
   const page = graph.find((entry) => entry["@id"] === "https://betaer.github.io/#webpage");
-  assert.equal(projects.numberOfItems, 2);
+  assert.equal(projects.numberOfItems, 3);
   assert.equal(portfolio.numberOfItems, domains.length);
   assert.equal(portfolio.itemListOrder, "https://schema.org/ItemListUnordered");
   assert.equal(portfolio.itemListElement.length, domains.length);
@@ -100,15 +102,16 @@ test("页面使用语义分区和稳定页内导航", () => {
   assert.match(html, /<nav class="contact-links" aria-label="联系方式">/);
 });
 
-test("浏览器安全工具直接成为首屏主体", () => {
+test("App 与实用工具直接成为首屏主体", () => {
   const main = html.match(/<main id="main-content">([\s\S]*?)<\/main>/)?.[1];
   const projects = html.match(/<section class="projects shell"[^>]*id="projects"[\s\S]*?<\/section>/)?.[0];
   assert.ok(main, "缺少主要内容");
   assert.ok(projects, "缺少项目分区");
   assert.match(main, /^\s*<section class="projects shell" id="projects"/);
-  assert.match(projects, /<h1 id="projects-title">浏览器安全工具<\/h1>/);
+  assert.match(projects, /<h1 id="projects-title">App 与实用工具<\/h1>/);
   assert.match(projects, /<h2>AI Signal Guard<\/h2>/);
   assert.match(projects, /<h2>Password Generator<\/h2>/);
+  assert.match(projects, /<h2>LuCat 撸猫<\/h2>/);
   assert.doesNotMatch(projects, /<h3>/);
   assert.match(projects, /<img[^>]*ai-signal-guard-preview-600\.webp[^>]*loading="eager"[^>]*fetchpriority="high"/);
   assert.doesNotMatch(main, /class="hero|可信的浏览器工具|清楚的安全边界|hero-summary|hero-actions|hero-visual/);
@@ -127,12 +130,15 @@ test("项目、原则与域名分区使用紧凑的纵向节奏", () => {
   assert.match(style, /@media \(max-width: 768px\)[\s\S]*?\.projects\s*\{[^}]*padding-block:\s*32px 52px[^}]*\}[\s\S]*?\.principles\s*\{[^}]*padding-block:\s*48px[^}]*\}[\s\S]*?\.domains\s*\{[^}]*padding-block:\s*56px[^}]*\}/);
 });
 
-test("两个工具同时提供在线入口与源码入口", () => {
+test("项目提供官网、仓库与 LuCat 下载入口", () => {
   for (const url of [
     "https://betaer.github.io/AiSignalGuard/",
     "https://betaer.github.io/password-generator/",
     "https://github.com/betaer/AiSignalGuard",
     "https://github.com/betaer/password-generator",
+    "https://betaer.github.io/lucat/zh-Hans/",
+    "https://github.com/betaer/LuCat",
+    "https://apps.apple.com/us/app/lucat-cat-petting-timer/id6835910184",
   ]) {
     assert.ok(html.includes(`href="${url}"`), url);
   }
